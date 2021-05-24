@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 17 Bulan Mei 2021 pada 12.28
+-- Waktu pembuatan: 24 Bulan Mei 2021 pada 05.37
 -- Versi server: 5.7.24
 -- Versi PHP: 8.0.3
 
@@ -31,20 +31,19 @@ CREATE TABLE `mahasiswa` (
   `id` int(11) NOT NULL,
   `npm` bigint(20) NOT NULL,
   `nama` varchar(75) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `email` varchar(50) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `mahasiswa`
 --
 
-INSERT INTO `mahasiswa` (`id`, `npm`, `nama`, `email`) VALUES
-(38, 4519210011, 'Gucciio Gucci', 'guccio.gucci@emaiil.com'),
-(39, 4521210023, 'Mario Prada', 'mario.prada@email.com'),
-(40, 4519210022, 'Gianni Versace', 'giianni.versace@email.com'),
-(41, 4519210056, 'Thomas Burberry', 'thimas.burberry@email.com'),
-(42, 4519210011, 'Gabrielle Chanel', 'gabrielle.chanel@emaiil.com'),
-(43, 4519210035, 'Hubert de Givenchy', 'hubert.givenchy@email.com');
+INSERT INTO `mahasiswa` (`id`, `npm`, `nama`, `email`, `username`, `password`) VALUES
+(8, 4519210057, 'Mario Prada', 'mario@email.com', 'prada', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+(9, 4519210058, 'Phil Knight', 'pphil@email.com', 'phil', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+(10, 4519210059, 'Amancio Ortega', 'ortega@email.com', 'amancio', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 
 --
 -- Indexes for dumped tables
@@ -54,7 +53,8 @@ INSERT INTO `mahasiswa` (`id`, `npm`, `nama`, `email`) VALUES
 -- Indeks untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `npm` (`npm`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -64,7 +64,7 @@ ALTER TABLE `mahasiswa`
 -- AUTO_INCREMENT untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

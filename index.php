@@ -1,7 +1,12 @@
 <?php 
     include ('koneksi.php');
+    session_start(); 
+    if (!isset($_COOKIE["user"]) && !isset($_SESSION["user"])) {
+        session_unset();
+        session_destroy();
+        header("Location: loginpage.php");
+    }
     $query = mysqli_query($conn,"SELECT * FROM mahasiswa");
-    session_start();  
 ?>
 
 <!doctype html>
@@ -35,6 +40,7 @@
         p{
             font-family: work sans;
         }
+        .error {color: #FF0000;}
     </style>
 
     <title>UNIVERSITAS | Mahasiswa</title>
@@ -57,9 +63,14 @@
                     <?php unset($_SESSION['status']); ?>
                 <?php endif; ?>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
-                <i class="fas fa-user-plus"></i> Tambah Mahasiswa Baru
-                </button>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fas fa-user-plus"></i> Tambah Mahasiswa Baru
+                    </button>
+                    <form action="cookie.php" method="POST">
+                        <button class="btn btn-lg btn-warning ml-2 text-black" type="submit" name="logout" value="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </form>
+                </div>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -73,16 +84,25 @@
                             <form action="tambah.php" method="POST">
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label>Nama</label>
+                                        <label for="nama" >Nama</label>
                                         <input type="text" id="nama" class="form-control" name="nama" placeholder="Masukkan Nama">
+
                                     </div>
                                     <div class="form-group">
-                                        <label >NPM</label>
+                                        <label for="npm" >NPM</label>
                                         <input type="text" id="npm" class="form-control" name="npm" placeholder="Masukkan NPM">
                                     </div>
                                     <div class="form-group">
-                                        <label >E-Mail</label>
+                                        <label for="email" >E-Mail</label>
                                         <input type="email" id="email" class="form-control" name="email" placeholder="email@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" >Username</label>
+                                        <input type="text" id="username" class="form-control" name="username" autocomplete="off" placeholder="Masukkan Username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" >Password</label>
+                                        <input type="text" id="password" class="form-control" name="password" autocomplete="off" placeholder="Masukkan password">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -105,12 +125,14 @@
                                 <p class="h1"><?php echo $mhs["nama"]; ?></p>
                                 <span>
                                     <i class="far fa-id-card"> <?php echo $mhs["npm"]; ?></i> <br> 
-                                    <i class="far fa-envelope-open"> <?php echo $mhs["email"]; ?></i>
+                                    <i class="far fa-envelope-open"> <?php echo $mhs["email"]; ?></i> <br>
+                                    <i class="far fa-user"> <?php echo $mhs["username"]; ?></i> 
                                 </span>
                             </div>
-                            
-                            <a href="hapus.php?id=<?= $mhs['id'] ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')" class="btn btn-danger" ><i class="far fa-trash-alt"></i> HAPUS</a>
-                            
+                            <div>
+                                <a href="edit.php?id=<?= $mhs['id'] ?>" class="btn btn-primary" ><i class="far fa-trash-alt"></i> EDIT</a>
+                                <a href="hapus.php?id=<?= $mhs['id'] ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')" class="btn btn-danger" ><i class="far fa-trash-alt"></i> HAPUS</a>
+                            </div>  
                         </li>
                     </ul>
                 <?php endwhile ?>
@@ -127,6 +149,8 @@
         bootstrapValidate('#nama','required:Field nama harus di isi!');
         bootstrapValidate('#email','email:Masukkan alamat E-mail yang valid!');
         bootstrapValidate('#npm','numeric:Masukkan NIM hanya dengan angka!');
+        bootstrapValidate('#username','required:Field username harus di isi!');
+        bootstrapValidate('#password','required:Field password harus di isi!');
     </script>
   </body>
 </html>
