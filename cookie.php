@@ -17,7 +17,7 @@
                     //set cookie
                     setcookie('user',$username, time() + (2*60));
                 }
-                header("Location: ./index.php");
+                header("Location: index.php");
         } else{
             $_SESSION['status'] = "Username atau Password salah";
             header("Location: loginpage.php");

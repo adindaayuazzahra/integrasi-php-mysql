@@ -16,7 +16,6 @@ if(isset($_POST["submit"])){
     if (mysqli_num_rows($hasil)>0) {
         $_SESSION['status'] = "Data Gagal Dimasukkan, Username sudah Dafatarkan Sebelumnya!";
         header('Location: index.php');
-        // echo "<script>alert('Data produk berhasil ditambahkan'); window.location.href='index.php'</script>";
 
     } else {
         $password = sha1($_POST["password"]);

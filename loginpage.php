@@ -39,7 +39,6 @@
 
             .card-login .card-img {
             width: 45%;
-            /* background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512'); */
             background: scroll center url('https://source.unsplash.com/ute2XAFQU2I/414x512');
             background-size: cover;
             }
