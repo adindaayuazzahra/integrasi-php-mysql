@@ -62,7 +62,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password" >Password</label>
-                            <input type="text" id="password" class="form-control" name="password" autocomplete="off"placeholder="Masukkan Password Lama atau Password baru (bila ingin merubah)">
+                            <input type="text" id="password" class="form-control" name="password" autocomplete="off" value="<?php $mhs['password'] ?>" placeholder="Masukkan Password baru bila ingin merubah!">
                         </div>
                     </div>
                     <div class="modal-footer">
